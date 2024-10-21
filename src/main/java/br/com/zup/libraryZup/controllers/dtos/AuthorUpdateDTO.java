@@ -1,22 +1,33 @@
-package br.com.zup.libraryZup.controllers.models;
+package br.com.zup.libraryZup.controllers.dtos;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-@Entity
-public class Author {
+import java.time.LocalDate;
+
+public class AuthorUpdateDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Size(min = 3, max = 20)
     private String firstName;
+
+    @NotNull
+    @Size(min = 3, max = 20)
     private String lastName;
+
+    @NotNull
     private int yearOfBirth;
+
     private int yearOfDeath;
 
-    public Author() {}
+    public AuthorUpdateDTO() {}
 
     public Long getId() {
         return id;
@@ -26,27 +37,28 @@ public class Author {
         this.id = id;
     }
 
-    public String getFirstName() {
+    public @NotNull @Size(min = 3, max = 20) String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(@NotNull @Size(min = 3, max = 20) String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public @NotNull @Size(min = 3, max = 20) String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(@NotNull @Size(min = 3, max = 20) String lastName) {
         this.lastName = lastName;
     }
 
+    @NotNull
     public int getYearOfBirth() {
         return yearOfBirth;
     }
 
-    public void setYearOfBirth(int yearOfBirth) {
+    public void setYearOfBirth(@NotNull int yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
     }
 

@@ -38,7 +38,7 @@ public class BookControlller {
     }
 
     @PutMapping("/{id}")
-    public Book updateJogador(@PathVariable Long id, @RequestBody @Valid BookUpdateDTO bookUpdateDTO) {
+    public Book updateBook(@PathVariable Long id, @RequestBody @Valid BookUpdateDTO bookUpdateDTO) {
         return bookService.updateBook(BookMapper.fromBookUpdate(bookUpdateDTO));
     }
 
