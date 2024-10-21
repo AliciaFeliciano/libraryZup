@@ -1,21 +1,18 @@
-package br.com.zup.libraryZup.controllers.models;
-
-import jakarta.persistence.*;
+package br.com.zup.libraryZup.controllers.dtos;
 
 
-@Entity
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+
+public class BookRegisterDTO {
+    @NotBlank
+    @Size(min = 2)
     private String title;
+    @NotBlank
     private String description;
 
-    public Book(){}
-
-    public Long getId() {return id;}
-
-    public void setId(Long id) {this.id = id;}
+    public BookRegisterDTO(){}
 
     public String getTitle() {return title;}
 
