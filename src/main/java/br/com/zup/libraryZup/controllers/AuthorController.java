@@ -3,26 +3,32 @@ package br.com.zup.libraryZup.controllers;
 import br.com.zup.libraryZup.controllers.dtos.AuthorRegisterDTO;
 import br.com.zup.libraryZup.controllers.dtos.AuthorUpdateDTO;
 import br.com.zup.libraryZup.controllers.models.Author;
+import br.com.zup.libraryZup.repository.BookRepository;
 import br.com.zup.libraryZup.services.AuthorService;
 import br.com.zup.libraryZup.services.mappers.AuthorMapper;
-import jakarta.validation.Valid;
+import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
 
+    private final AuthorService authorService;
+    private final BookRepository bookRepository;
+
     @Autowired
-    private AuthorService authorService;
+    public AuthorController(AuthorService authorService, BookRepository bookRepository) {
+        this.authorService = authorService;
+        this.bookRepository = bookRepository;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Author registerAuthor(@RequestBody @Valid AuthorRegisterDTO authorRegisterDTO) {
-        Author author = AuthorMapper.fromAuthorRegisterDTO(authorRegisterDTO);
+        Author author = AuthorMapper.fromAuthorRegister(authorRegisterDTO, bookRepository);
         return authorService.save(author);
     }
 
@@ -38,7 +44,9 @@ public class AuthorController {
 
     @PutMapping("/{id}")
     public Author updateAuthor(@PathVariable Long id, @RequestBody @Valid AuthorUpdateDTO authorUpdateDTO) {
-        return authorService.updateAuthor(AuthorMapper.fromAuthorUpdate(authorUpdateDTO));
+        authorUpdateDTO.setId(id);
+        Author updatedAuthor = AuthorMapper.fromAuthorUpdate(authorUpdateDTO, bookRepository);
+        return authorService.updateAuthor(updatedAuthor);
     }
 
     @DeleteMapping("/{id}")
@@ -47,4 +55,3 @@ public class AuthorController {
         authorService.deleteAuthor(id);
     }
 }
-

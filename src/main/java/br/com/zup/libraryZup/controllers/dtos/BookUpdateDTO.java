@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 public class BookUpdateDTO {
 
     @Id
@@ -15,6 +17,8 @@ public class BookUpdateDTO {
     private String title;
     @NotBlank
     private String description;
+    @NotBlank
+    private List<Long> authorIds;
 
     public BookUpdateDTO() {}
 
@@ -26,4 +30,11 @@ public class BookUpdateDTO {
 
     public void setDescription(String description) {this.description = description;}
 
+    public Long getId() {return id;}
+
+    public void setId(Long id) {this.id = id;}
+
+    public @NotBlank List<Long> getAuthorIds() {return authorIds;}
+
+    public void setAuthorIds(@NotBlank List<Long> authorIds) {this.authorIds = authorIds;}
 }

@@ -2,6 +2,8 @@ package br.com.zup.libraryZup.controllers.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 public class Book {
@@ -10,6 +12,9 @@ public class Book {
     private Long id;
     private String title;
     private String description;
+
+    @ManyToMany(mappedBy = "books")
+    private List<Author> authors;
 
     public Book(){}
 
@@ -24,5 +29,9 @@ public class Book {
     public String getDescription() {return description;}
 
     public void setDescription(String description) {this.description = description;}
+
+    public List<Author> getAuthors() {return authors;}
+
+    public void setAuthors(List<Author> authors) {this.authors = authors;}
 
 }

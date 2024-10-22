@@ -1,8 +1,9 @@
 package br.com.zup.libraryZup.controllers.dtos;
 
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 
 public class BookRegisterDTO {
@@ -11,6 +12,9 @@ public class BookRegisterDTO {
     private String title;
     @NotBlank
     private String description;
+
+    @NotBlank
+    private List<Long> authorIds;
 
     public BookRegisterDTO(){}
 
@@ -22,4 +26,7 @@ public class BookRegisterDTO {
 
     public void setDescription(String description) {this.description = description;}
 
+    public @NotBlank List<Long> getAuthorIds() {return authorIds;}
+
+    public void setAuthorIds(@NotBlank List<Long> authorIds) {this.authorIds = authorIds;}
 }
