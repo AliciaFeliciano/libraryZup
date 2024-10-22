@@ -1,10 +1,9 @@
 package br.com.zup.libraryZup.controllers.dtos;
 
-import br.com.zup.libraryZup.controllers.models.Book;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
@@ -15,20 +14,20 @@ public class AuthorUpdateDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Size(min = 3, max = 20)
     private String firstName;
 
-    @NotNull
+    @NotBlank
     @Size(min = 3, max = 20)
     private String lastName;
 
-    @NotNull
+    @NotBlank
     private int yearOfBirth;
 
     private int yearOfDeath;
 
-    @NotNull
+    @NotBlank
     private List<Long> bookIds;
 
     public AuthorUpdateDTO() {}
@@ -37,24 +36,24 @@ public class AuthorUpdateDTO {
 
     public void setId(Long id) {this.id = id;}
 
-    public @NotNull @Size(min = 3, max = 20) String getFirstName() {return firstName;}
+    public @NotBlank @Size(min = 3, max = 20) String getFirstName() {return firstName;}
 
-    public void setFirstName(@NotNull @Size(min = 3, max = 20) String firstName) {this.firstName = firstName;}
+    public void setFirstName(@NotBlank @Size(min = 3, max = 20) String firstName) {this.firstName = firstName;}
 
-    public @NotNull @Size(min = 3, max = 20) String getLastName() {return lastName;}
+    public @NotBlank @Size(min = 3, max = 20) String getLastName() {return lastName;}
 
-    public void setLastName(@NotNull @Size(min = 3, max = 20) String lastName) {this.lastName = lastName;}
+    public void setLastName(@NotBlank @Size(min = 3, max = 20) String lastName) {this.lastName = lastName;}
 
-    @NotNull
+    @NotBlank
     public int getYearOfBirth() {return yearOfBirth;}
 
-    public void setYearOfBirth(@NotNull int yearOfBirth) {this.yearOfBirth = yearOfBirth;}
+    public void setYearOfBirth(@NotBlank int yearOfBirth) {this.yearOfBirth = yearOfBirth;}
 
     public int getYearOfDeath() {return yearOfDeath;}
 
     public void setYearOfDeath(int yearOfDeath) {this.yearOfDeath = yearOfDeath;}
 
-    public @NotNull List<Long> getBookIds() {return bookIds;}
+    public @NotBlank List<Long> getBookIds() {return bookIds;}
 
-    public void setBookIds(@NotNull List<Long> bookIds) {this.bookIds = bookIds;}
+    public void setBookIds(@NotBlank List<Long> bookIds) {this.bookIds = bookIds;}
 }
