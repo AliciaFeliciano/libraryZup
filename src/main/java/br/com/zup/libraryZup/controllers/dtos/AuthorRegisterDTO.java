@@ -16,12 +16,12 @@ public class AuthorRegisterDTO {
     @Size(min = 3, max = 20)
     private String lastName;
 
-    @NotBlank
+
     private int yearOfBirth;
 
     private int yearOfDeath;
 
-    @NotBlank
+
     private List<Long> bookIds;
 
     public AuthorRegisterDTO() {}
@@ -34,17 +34,16 @@ public class AuthorRegisterDTO {
 
     public void setLastName(@NotBlank @Size(min = 3, max = 20) String lastName) {this.lastName = lastName;}
 
-    @NotBlank
+
     public int getYearOfBirth() {return yearOfBirth;}
 
-    public void setYearOfBirth(@NotBlank int yearOfBirth) {this.yearOfBirth = yearOfBirth;}
+    public void setYearOfBirth( int yearOfBirth) {this.yearOfBirth = yearOfBirth;}
 
     public int getYearOfDeath() {return yearOfDeath;}
 
     public void setYearOfDeath(int yearOfDeath) {this.yearOfDeath = yearOfDeath;}
 
-    public @NotBlank List<Long> getBookIds() {return bookIds;}
+    public  List<Long> getBookIds() {return bookIds;}
 
-    public void setBookIds(@NotBlank List<Long> bookIds) {this.bookIds = bookIds;}
+    public void setBookIds( List<Long> bookIds) {this.bookIds = bookIds;}
 }
-

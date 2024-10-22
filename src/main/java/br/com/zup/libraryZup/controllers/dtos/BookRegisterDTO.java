@@ -13,7 +13,7 @@ public class BookRegisterDTO {
     @NotBlank
     private String description;
 
-    @NotBlank
+
     private List<Long> authorIds;
 
     public BookRegisterDTO(){}
@@ -26,7 +26,7 @@ public class BookRegisterDTO {
 
     public void setDescription(String description) {this.description = description;}
 
-    public @NotBlank List<Long> getAuthorIds() {return authorIds;}
+    public  List<Long> getAuthorIds() {return authorIds;}
 
-    public void setAuthorIds(@NotBlank List<Long> authorIds) {this.authorIds = authorIds;}
+    public void setAuthorIds( List<Long> authorIds) {this.authorIds = authorIds;}
 }

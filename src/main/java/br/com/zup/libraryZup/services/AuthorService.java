@@ -46,6 +46,7 @@ public class AuthorService {
         authorDB.setLastName(author.getLastName());
         authorDB.setYearOfBirth(author.getYearOfBirth());
         authorDB.setYearOfDeath(author.getYearOfDeath());
+        authorDB.setBooks(author.getBooks());
 
         return authorRepository.save(authorDB);
     }

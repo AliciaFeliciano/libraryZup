@@ -17,7 +17,7 @@ public class BookUpdateDTO {
     private String title;
     @NotBlank
     private String description;
-    @NotBlank
+
     private List<Long> authorIds;
 
     public BookUpdateDTO() {}
@@ -34,7 +34,7 @@ public class BookUpdateDTO {
 
     public void setId(Long id) {this.id = id;}
 
-    public @NotBlank List<Long> getAuthorIds() {return authorIds;}
+    public  List<Long> getAuthorIds() {return authorIds;}
 
-    public void setAuthorIds(@NotBlank List<Long> authorIds) {this.authorIds = authorIds;}
+    public void setAuthorIds( List<Long> authorIds) {this.authorIds = authorIds;}
 }

@@ -35,11 +35,13 @@ public class BookService {
                 throw new IllegalArgumentException("Ja existe um livro com esse id");
 
             }
+
             bookDB.setId(book.getId());
         }
 
         bookDB.setTitle(book.getTitle());
         bookDB.setDescription(book.getDescription());
+        bookDB.setAuthors(book.getAuthors());
 
         return bookRepository.save(book);
     }

@@ -37,9 +37,9 @@ public class AuthorMapper {
             List<Book> books = bookRepository.findAllById(authorUpdateDTO.getBookIds());
             author.setBooks(books);
         }
+
         return author;
     }
 }
-
 
 
