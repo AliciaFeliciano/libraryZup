@@ -26,6 +26,7 @@ public class AuthorMapper {
 
     public static Author fromAuthorUpdate(AuthorUpdateDTO authorUpdateDTO, BookRepository bookRepository) {
         Author author = new Author();
+
         author.setId(authorUpdateDTO.getId());
         author.setFirstName(authorUpdateDTO.getFirstName());
         author.setLastName(authorUpdateDTO.getLastName());

@@ -17,6 +17,9 @@ public class AuthorService {
     }
 
     public Author save(Author author) {
+        if (author.getBooks() != null && author.getBooks().size() > 5) {
+            throw new IllegalArgumentException("Limite maximo de livros excedidos");
+        }
         return authorRepository.save(author);
     }
 
@@ -26,17 +29,17 @@ public class AuthorService {
 
     public Author findAuthor(Long id) {
         return authorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Author not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Author não existe"));
     }
 
     public Author updateAuthor(Author author) {
         Author authorDB = findAuthor(author.getId());
 
         if (!authorDB.getId().equals(author.getId())) {
-            if(authorRepository.existsById(author.getId())) {
-                throw new IllegalArgumentException("An author with this ID already exists");
+            if (author.getBooks() != null && author.getBooks().size() > 5) {
+                throw new IllegalArgumentException("Limite maximo de livros excedidos");
+
             }
-            authorDB.setId(author.getId());
         }
 
         authorDB.setFirstName(author.getFirstName());
