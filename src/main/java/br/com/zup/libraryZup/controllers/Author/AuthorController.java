@@ -1,16 +1,18 @@
-package br.com.zup.libraryZup.controllers;
+package br.com.zup.libraryZup.controllers.Author;
 
-import br.com.zup.libraryZup.controllers.dtos.AuthorRegisterDTO;
-import br.com.zup.libraryZup.controllers.dtos.AuthorUpdateDTO;
+import br.com.zup.libraryZup.controllers.Author.dtos.AuthorRegisterDTO;
+import br.com.zup.libraryZup.controllers.Author.dtos.AuthorUpdateDTO;
 import br.com.zup.libraryZup.controllers.models.Author;
 import br.com.zup.libraryZup.repository.BookRepository;
 import br.com.zup.libraryZup.services.AuthorService;
 import br.com.zup.libraryZup.services.mappers.AuthorMapper;
-import jakarta.validation.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/author")
@@ -27,26 +29,31 @@ public class AuthorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Author registerAuthor(@RequestBody @Valid AuthorRegisterDTO authorRegisterDTO) {
+    public AuthorRegisterDTO registerAuthor(@RequestBody @Valid AuthorRegisterDTO authorRegisterDTO) {
         Author author = AuthorMapper.fromAuthorRegister(authorRegisterDTO, bookRepository);
-        return authorService.save(author);
+        Author savedAuthor = authorService.save(author);
+        return AuthorMapper.toRegisterDTO(savedAuthor);
     }
 
     @GetMapping
-    public List<Author> listAuthors() {
-        return authorService.findAll();
+    public List<AuthorRegisterDTO> listAuthors() {
+        return authorService.findAll().stream()
+                .map(AuthorMapper::toRegisterDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Author findAuthorById(@PathVariable Long id) {
-        return authorService.findAuthor(id);
+    public AuthorRegisterDTO findAuthorById(@PathVariable Long id) {
+        Author author = authorService.findAuthor(id);
+        return AuthorMapper.toRegisterDTO(author);
     }
 
     @PutMapping("/{id}")
-    public Author updateAuthor(@PathVariable Long id, @RequestBody @Valid AuthorUpdateDTO authorUpdateDTO) {
+    public AuthorUpdateDTO updateAuthor(@PathVariable Long id, @RequestBody @Valid AuthorUpdateDTO authorUpdateDTO) {
         authorUpdateDTO.setId(id);
         Author updatedAuthor = AuthorMapper.fromAuthorUpdate(authorUpdateDTO, bookRepository);
-        return authorService.updateAuthor(updatedAuthor);
+        Author savedAuthor = authorService.updateAuthor(updatedAuthor);
+        return AuthorMapper.toUpdateDTO(savedAuthor);
     }
 
     @DeleteMapping("/{id}")

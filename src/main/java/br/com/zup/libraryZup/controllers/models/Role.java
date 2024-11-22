@@ -1,25 +1,25 @@
 package br.com.zup.libraryZup.controllers.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
+@Entity
+@Data
+@Table(name = "roles")
 @Getter
 @Setter
-@Entity
-public class Book {
-
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String description;
+    private String name;
 
-    @ManyToMany(mappedBy = "books")
-    private List<Author> authors;
+    public Role(String name) {
+        this.name = name;
+    }
 
-    public Book(){}
-
+    public Role() {
+    }
 }

@@ -1,7 +1,7 @@
 package br.com.zup.libraryZup.services.mappers;
 
-import br.com.zup.libraryZup.controllers.dtos.BookRegisterDTO;
-import br.com.zup.libraryZup.controllers.dtos.BookUpdateDTO;
+import br.com.zup.libraryZup.controllers.Book.dtos.BookRegisterDTO;
+import br.com.zup.libraryZup.controllers.Book.dtos.BookUpdateDTO;
 import br.com.zup.libraryZup.controllers.models.Author;
 import br.com.zup.libraryZup.controllers.models.Book;
 import br.com.zup.libraryZup.repository.AuthorRepository;
@@ -33,5 +33,26 @@ public class BookMapper {
             book.setAuthors(authors);
         }
         return book;
+    }
+
+    public static BookRegisterDTO toRegisterDTO(Book book) {
+        BookRegisterDTO dto = new BookRegisterDTO();
+        dto.setTitle(book.getTitle());
+        dto.setDescription(book.getDescription());
+        dto.setAuthorIds(
+                book.getAuthors() != null ? book.getAuthors().stream().map(Author::getId).toList() : null
+        );
+        return dto;
+    }
+
+    public static BookUpdateDTO toUpdateDTO(Book book) {
+        BookUpdateDTO dto = new BookUpdateDTO();
+        dto.setId(book.getId());
+        dto.setTitle(book.getTitle());
+        dto.setDescription(book.getDescription());
+        dto.setAuthorIds(
+                book.getAuthors() != null ? book.getAuthors().stream().map(Author::getId).toList() : null
+        );
+        return dto;
     }
 }

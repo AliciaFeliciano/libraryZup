@@ -2,8 +2,9 @@ package br.com.zup.libraryZup.services;
 
 import br.com.zup.libraryZup.controllers.models.Author;
 import br.com.zup.libraryZup.repository.AuthorRepository;
-import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
+import br.com.zup.libraryZup.services.mappers.exceptions.InvalidBookException;
 
 import java.util.List;
 
@@ -16,10 +17,7 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    public Author save(Author author) {
-        if (author.getBooks() != null && author.getBooks().size() > 5) {
-            throw new IllegalArgumentException("Limite maximo de livros excedidos");
-        }
+    public Author save(@Valid Author author) {
         return authorRepository.save(author);
     }
 
@@ -29,30 +27,23 @@ public class AuthorService {
 
     public Author findAuthor(Long id) {
         return authorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Author não existe"));
+                .orElseThrow(() -> new AuthorNotFoundException("Autor com ID " + id + " não encontrado."));
     }
 
-    public Author updateAuthor(Author author) {
-        Author authorDB = findAuthor(author.getId());
+    public Author updateAuthor(@Valid Author author) {
+        Author existingAuthor = findAuthor(author.getId());
 
-        if (!authorDB.getId().equals(author.getId())) {
-            if (author.getBooks() != null && author.getBooks().size() > 5) {
-                throw new IllegalArgumentException("Limite maximo de livros excedidos");
+        existingAuthor.setFirstName(author.getFirstName());
+        existingAuthor.setLastName(author.getLastName());
+        existingAuthor.setYearOfBirth(author.getYearOfBirth());
+        existingAuthor.setYearOfDeath(author.getYearOfDeath());
+        existingAuthor.setBooks(author.getBooks());
 
-            }
-        }
-
-        authorDB.setFirstName(author.getFirstName());
-        authorDB.setLastName(author.getLastName());
-        authorDB.setYearOfBirth(author.getYearOfBirth());
-        authorDB.setYearOfDeath(author.getYearOfDeath());
-        authorDB.setBooks(author.getBooks());
-
-        return authorRepository.save(authorDB);
+        return authorRepository.save(existingAuthor);
     }
 
     public void deleteAuthor(Long id) {
         Author author = findAuthor(id);
-        authorRepository.deleteById(author.getId());
+        authorRepository.delete(author);
     }
 }

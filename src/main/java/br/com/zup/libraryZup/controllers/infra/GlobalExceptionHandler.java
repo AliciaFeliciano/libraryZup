@@ -1,4 +1,4 @@
-package br.com.zup.libraryZup.controllers;
+package br.com.zup.libraryZup.controllers.infra;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

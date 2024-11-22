@@ -1,7 +1,7 @@
 package br.com.zup.libraryZup.services.mappers;
 
-import br.com.zup.libraryZup.controllers.dtos.AuthorRegisterDTO;
-import br.com.zup.libraryZup.controllers.dtos.AuthorUpdateDTO;
+import br.com.zup.libraryZup.controllers.Author.dtos.AuthorRegisterDTO;
+import br.com.zup.libraryZup.controllers.Author.dtos.AuthorUpdateDTO;
 import br.com.zup.libraryZup.controllers.models.Author;
 import br.com.zup.libraryZup.controllers.models.Book;
 import br.com.zup.libraryZup.repository.BookRepository;
